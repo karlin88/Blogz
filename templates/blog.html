@@ -8,7 +8,9 @@
             {{ blogpost.blogtitle }}
             </a>
     </h2>
+    {% if blogpost.imagepath %}
     <img src="{{ blogpost.imagepath }}" alt="{{ blogpost.blogtitle }}">
+    {% endif %}
     <p>
         {{ blogpost.body }}
     </p>
