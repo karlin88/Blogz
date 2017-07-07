@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+
+<form action="/" method="post">
+    <table>
+    <tr>
+        <td>Username</td>
+        <td>
+            <input type="text" name="Username" value="{{ Username }}">
+            <span class="error">{{ username_error }}</span>
+        </td>
+    </tr>
+    <tr>
+        <td>Password</td>
+        <td>
+            <input type="password" name="Password">
+            <span class="error">{{ pass_error }}</span>
+        </td>
+    </tr>
+    <tr>
+        <td>Verify Password</td>
+        <td>
+            <input type="password" name="VerifyPass">
+            <span class="error">{{ vpass_error }}</span>
+        </td>
+    </tr>
+    <tr>
+        <td>Email (optional)</td>
+        <td>
+            <input type="text" name="EmailOptional" value="{{ Email }}">
+            <span class="error">{{ email_error }}</span>
+        </td>
+    </tr>
+    </table>
+    <input type="submit" value="Submit">
+</form>
+
+
+
+{% endblock %}

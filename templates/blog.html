@@ -4,7 +4,7 @@
  {% for blogpost in blog: %}
 <div class="postbreak">
     <h2>
-        <a href="{{ url_for('index', id=blogpost.id) }}">
+        <a href="{{ url_for('index', id=blogpost.blog_id) }}">
             {{ blogpost.blogtitle }}
             </a>
     </h2>

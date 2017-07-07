@@ -1,12 +1,12 @@
 from flask import Flask, request, redirect, render_template
 from flask_sqlalchemy import SQLAlchemy
 from app import db, app
-from models import Blog
+from models import Blog, User
 import cgi
 
 
 def get_blogs():
-    return Blog.query.order_by(Blog.id.desc()).all()
+    return Blog.query.order_by(blog.blog_id.desc()).all()
 
 def get_singleblog(blogid):
     return Blog.query.filter_by(id = blogid)
@@ -23,7 +23,7 @@ def convertstrtoblank(string):
     else:
         return string
 
-@app.route("/")
+@app.route("/blog")
 def index():
     blogpost = request.args.get("id")
     if blogpost is None:
@@ -53,7 +53,7 @@ def add_post():
         blog = Blog(title, postbody, image)
         db.session.add(blog)
         db.session.commit()
-        return redirect ("/?id=" + str(blog.id))
+        return redirect ("/blog?id=" + str(blog.blog_id))
     else:
         return render_template('newpost.html',
             title_error = convertstrtoblank(t_error),
