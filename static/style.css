@@ -23,6 +23,7 @@ div.container {
 nav{
     float: left;
     max-width: 30%;
+    margin-left: 2%;
 }
 ul {
     list-style-type: none;

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Blog</title>
+    <title>Blogs</title>
     <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static', filename='style.css') }}" >
 </head>
 
@@ -18,6 +18,13 @@
                 <li><a href="/blog">Home</a>
                 <!--li><a href="/about">About</a-->
                 <li><a href="/newpost">New Post</a>
+                <li><a href="/signup">Sign Up</a>
+                {% if user %}
+                <li><a href="/login">Log In</a>
+                {% endif %}
+                {% if user %}
+                <li><a href="/logout">Log Out</a>
+                {% endif %}
             </ul>
         </nav>
 

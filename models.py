@@ -8,22 +8,21 @@ class Blog(db.Model):
     imagepath = db.Column(db.String(120))
     user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'))
 
-    def __init__(self, blogtitle, body, imagepath, blogger):
+    def __init__(self, blogtitle, body, blogger):
         self.blogtitle = blogtitle
         self.body = body
-        self.imagepath = imagepath
         self.blogger = blogger
 
     def __repr__(self):
         return '<Blog %r>' % self.blogtitle
 
+
 class User(db.Model):
     user_id = db.Column(db.Integer, primary_key = True)
-    username = db.Column(db.string(20))
-    password = db.Column(db.string(50))
+    username = db.Column(db.String(30), unique = True)
+    password = db.Column(db.String(50))
     blogs = db.relationship('Blog', backref = 'blogger')
 
     def __init__(self, username, password):
         self.username = username
         self.password = password
-        

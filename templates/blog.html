@@ -1,10 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
 
- {% for blogpost in blog: %}
+
+{% for blogpost in blog: %}
 <div class="postbreak">
     <h2>
-        <a href="{{ url_for('index', id=blogpost.blog_id) }}">
+        <a href="{{ url_for('blog', blogid=blogpost.blog_id) }}">
             {{ blogpost.blogtitle }}
             </a>
     </h2>
