@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+from hashutils import make_pw_hash
 from app import db
 
 class Blog(db.Model):
@@ -20,9 +21,9 @@ class Blog(db.Model):
 class User(db.Model):
     user_id = db.Column(db.Integer, primary_key = True)
     username = db.Column(db.String(30), unique = True)
-    password = db.Column(db.String(50))
+    password = db.Column(db.String(500))
     blogs = db.relationship('Blog', backref = 'blogger')
 
     def __init__(self, username, password):
         self.username = username
-        self.password = password
+        self.password = make_pw_hash(password)
