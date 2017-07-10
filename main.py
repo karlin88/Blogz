@@ -97,36 +97,36 @@ def blog():
         blogs = get_singleblog(blogpost)
     return render_template('blog.html', blog = blogs)
 
-@app.route("/newpost")
-def newblogform():
-    return render_template('newpost.html')
 
+@app.route("/newpost", methods=['POST','GET'])
+def newpost():
+    if request.method == 'POST':
+        title = request.form['blogtitle']
+        postbody = request.form['body']
+        image = request.form['imagepath']
+        t_error = ''
+        b_error = ''
+        user = User.query.filter_by(username=session['username']).first()
 
-@app.route("/newpost", methods=['POST'])
-def add_post():
-    title = request.form['blogtitle']
-    postbody = request.form['body']
-    image = convertstrtoblank(request.form['imagepath'])
-    
-    user = request.args.get("user")
-
-    if doesnotexist(title):
-        t_error = "Please fill in the title"
-    
-    if doesnotexist(postbody):
-        b_error = "Please fill in the body"
-    
-    #return render_template('blog.html', blog = get_blogs())
-    if doesnotexist(t_error) and doesnotexist(b_error):
-        blog = Blog(title, postbody, image)
-        db.session.add(blog)
-        db.session.commit()
-        return redirect ("/blog?blogid=" + str(blog.blog_id))
+        if doesnotexist(title):
+            t_error = "Please fill in the title"
+        
+        if doesnotexist(postbody):
+            b_error = "Please fill in the body"
+        
+        #return render_template('blog.html', blog = get_blogs())
+        if doesnotexist(t_error) and doesnotexist(b_error):
+            blog = Blog(title, postbody, user.user_id, image)
+            db.session.add(blog)
+            db.session.commit()
+            return redirect ("/blog?blogid=" + str(blog.blog_id))
+        else:
+            return render_template('newpost.html',
+                title_error = convertstrtoblank(t_error),
+                body_error = convertstrtoblank(b_error)
+            )
     else:
-        return render_template('newpost.html',
-            title_error = convertstrtoblank(t_error),
-            body_error = convertstrtoblank(b_error)
-        )
+        return render_template('newpost.html')
 
 
 @app.route("/")

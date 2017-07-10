@@ -9,10 +9,11 @@ class Blog(db.Model):
     imagepath = db.Column(db.String(120))
     user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'))
 
-    def __init__(self, blogtitle, body, blogger):
+    def __init__(self, blogtitle, body, user_id, imagepath=None):
         self.blogtitle = blogtitle
         self.body = body
-        self.blogger = blogger
+        self.user_id = user_id
+        self.imagepath = imagepath
 
     def __repr__(self):
         return '<Blog %r>' % self.blogtitle

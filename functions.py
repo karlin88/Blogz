@@ -12,7 +12,7 @@ def get_users():
     return User.query.all()
 
 def get_singleblog(blogid):
-    return Blog.query.filter_by(id = blogid)
+    return Blog.query.filter_by(blog_id = blogid)
 
 
 def lengthnotvalid(string):
