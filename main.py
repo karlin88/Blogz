@@ -74,7 +74,7 @@ def signup():
             db.session.add(new_user)
             db.session.commit()
             session['username'] = username
-            return redirect('/')
+            return redirect('/newpost')
         else:
             return render_template('signup.html',
                 username = convertstrtoblank(username), 
