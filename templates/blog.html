@@ -15,7 +15,12 @@
     <p>
         {{ blogpost.body }}
     </p>
-</div>
+    <br>
+    <p id="author">
+        written by <a href="{{ url_for('blog', userid=blogpost.user_id) }}">
+            {{ blogpost.username }}
+    </p>
+    </div>
 {% endfor %}
 
 

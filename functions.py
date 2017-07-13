@@ -4,9 +4,10 @@ from models import Blog, User
 
 def get_blogs(userid = None):
     if userid is None:
-        return Blog.query.order_by(Blog.blog_id.desc()).all()
+        return Blog.query.join(User).add_columns(Blog.blog_id, Blog.blogtitle, Blog.body, Blog.imagepath, Blog.user_id, User.username).order_by(Blog.blog_id.desc()).all()
+        
     else:
-        return Blog.query.filter_by(user_id = userid).all()
+        return Blog.query.join(User).add_columns(Blog.blog_id, Blog.blogtitle, Blog.body, Blog.imagepath, Blog.user_id, User.username).filter_by(user_id = userid).all()
 
 def get_users():
     return User.query.all()
